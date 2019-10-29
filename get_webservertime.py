@@ -12,7 +12,6 @@ def get_webservertime(host):
     # # 将GMT时间转换成北京时间
     ltime = time.strptime(ts[5:25], "%d %b %Y %H:%M:%S")
     # print(ltime)
-    # print(ltime)
     ttime = time.localtime(time.mktime(ltime) + 8 * 60 * 60)
     # print(ttime)
     dat = "%u-%02u-%02u" % (ttime.tm_year, ttime.tm_mon, ttime.tm_mday)
