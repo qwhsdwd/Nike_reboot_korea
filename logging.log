@@ -1,0 +1,99 @@
+2019-11-07 09:58:13,330 - WARNING - warn message
+2019-11-07 09:58:13,330 - ERROR - error message
+2019-11-07 09:58:13,330 - CRITICAL - critical message
+2019-11-07 09:59:28,130 - WARNING - warn message
+2019-11-07 09:59:28,130 - ERROR - error message
+2019-11-07 09:59:28,130 - CRITICAL - critical message
+2019-11-07 09:59:46,107 - WARNING - warn message
+2019-11-07 09:59:46,107 - ERROR - error message
+2019-11-07 09:59:46,107 - CRITICAL - critical message
+2019-11-07 10:00:28,011 - WARNING - warn message
+2019-11-07 10:00:28,011 - ERROR - error message
+2019-11-07 10:00:28,012 - CRITICAL - critical message
+2019-11-07 10:02:02,110 - qwh - WARNING - warn message
+2019-11-07 10:02:02,110 - qwh - ERROR - error message
+2019-11-07 10:02:02,110 - qwh - CRITICAL - critical message
+2019-11-07 10:02:31,754 qwh WARNING warn message
+2019-11-07 10:02:31,755 qwh ERROR error message
+2019-11-07 10:02:31,755 qwh CRITICAL critical message
+2019-11-07 10:07:33,646 qwh WARNING warn message
+2019-11-07 10:07:33,647 qwh ERROR error message
+2019-11-07 10:07:33,647 qwh CRITICAL critical message
+2019-11-07 10:08:40,017 qwh WARNING warn message
+2019-11-07 10:08:40,017 qwh ERROR error message
+2019-11-07 10:08:40,017 qwh CRITICAL critical message
+2019-11-07 10:09:24,176 qwh WARNING warn message
+2019-11-07 10:09:24,176 qwh ERROR error message
+2019-11-07 10:09:24,176 qwh CRITICAL critical message
+2019-11-07 10:09:29,274 qwh WARNING warn message
+2019-11-07 10:09:29,275 qwh ERROR error message
+2019-11-07 10:09:29,275 qwh CRITICAL critical message
+Thu 07 Nov 2019 13:50:27 WARNING test1.py 26 5529 warn message
+Thu 07 Nov 2019 13:50:27 ERROR test1.py 27 5529 error message
+Thu 07 Nov 2019 13:50:27 CRITICAL test1.py 28 5529 critical message
+Thu 07 Nov 2019 13:55:21 WARNING test1.py 26 5883 warn message
+Thu 07 Nov 2019 13:55:21 ERROR test1.py 27 5883 error message
+Thu 07 Nov 2019 13:55:21 CRITICAL test1.py 28 5883 critical message
+Thu 07 Nov 2019 13:56:35 WARNING test1.py 27 5981 warn message
+Thu 07 Nov 2019 13:56:35 ERROR test1.py 28 5981 error message
+Thu 07 Nov 2019 13:56:35 CRITICAL test1.py 29 5981 critical message
+Thu 07 Nov 2019 13:56:54 WARNING test1.py 27 6007 warn message
+Thu 07 Nov 2019 13:56:54 ERROR test1.py 28 6007 error message
+Thu 07 Nov 2019 13:56:54 CRITICAL test1.py 29 6007 critical message
+Thu 07 Nov 2019 13:57:11 WARNING test1.py 27 6029 warn message
+Thu 07 Nov 2019 13:57:11 ERROR test1.py 28 6029 error message
+Thu 07 Nov 2019 13:57:11 CRITICAL test1.py 29 6029 critical message
+Thu 07 Nov 2019 13:57:21 WARNING test1.py 27 6046 warn message
+Thu 07 Nov 2019 13:57:21 ERROR test1.py 28 6046 error message
+Thu 07 Nov 2019 13:57:21 CRITICAL test1.py 29 6046 critical message
+Thu 07 Nov 2019 14:11:50 WARNING test1.py 27 7233 warn message
+Thu 07 Nov 2019 14:11:50 ERROR test1.py 28 7233 error message
+Thu 07 Nov 2019 14:11:50 CRITICAL test1.py 29 7233 critical message
+Thu 07 Nov 2019 14:12:26 WARNING test1.py 27 7272 warn message
+Thu 07 Nov 2019 14:12:26 ERROR test1.py 28 7272 error message
+Thu 07 Nov 2019 14:12:26 CRITICAL test1.py 29 7272 critical message
+Thu 07 Nov 2019 14:13:51 WARNING warn message
+Thu 07 Nov 2019 14:13:51 ERROR error message
+Thu 07 Nov 2019 14:13:51 CRITICAL critical message
+2019-11-07 14:16:15' WARNING warn message
+2019-11-07 14:16:15' ERROR error message
+2019-11-07 14:16:15' CRITICAL critical message
+2019-11-07 14:17:58 WARNING warn message
+2019-11-07 14:17:58 ERROR error message
+2019-11-07 14:17:58 CRITICAL critical message
+2019-11-07 14:18:48 WARNING warn message
+2019-11-07 14:18:48 ERROR error message
+2019-11-07 14:18:48 CRITICAL critical message
+2019-11-07 14:19:29 WARNING warn message
+2019-11-07 14:19:29 ERROR error message
+2019-11-07 14:19:29 CRITICAL critical message
+2019-11-07 14:19:44 WARNING warn message
+2019-11-07 14:19:44 ERROR error message
+2019-11-07 14:19:44 CRITICAL critical message
+2019-11-07 14:19:55 WARNING warn message
+2019-11-07 14:19:55 ERROR error message
+2019-11-07 14:19:55 CRITICAL critical message
+2019-11-07 14:20:03 WARNING warn message
+2019-11-07 14:20:03 ERROR error message
+2019-11-07 14:20:03 CRITICAL critical message
+2019-11-07 14:32:30 WARNING warn message
+2019-11-07 14:32:30 ERROR error message
+2019-11-07 14:32:30 CRITICAL critical message
+2019-11-07 14:32:35 WARNING warn message
+2019-11-07 14:32:35 ERROR error message
+2019-11-07 14:32:35 CRITICAL critical message
+2019-11-07 14:32:41 WARNING warn message
+2019-11-07 14:32:41 ERROR error message
+2019-11-07 14:32:41 CRITICAL critical message
+2019-11-07 14:33:16 WARNING warn message
+2019-11-07 14:33:16 ERROR error message
+2019-11-07 14:33:16 CRITICAL critical message
+2019-11-07 14:34:01 WARNING warn message
+2019-11-07 14:34:01 ERROR error message
+2019-11-07 14:34:01 CRITICAL critical message
+2019-11-07 14:34:03 WARNING warn message
+2019-11-07 14:34:03 ERROR error message
+2019-11-07 14:34:03 CRITICAL critical message
+2019-11-07 14:34:08 WARNING warn message
+2019-11-07 14:34:08 ERROR error message
+2019-11-07 14:34:08 CRITICAL critical message
