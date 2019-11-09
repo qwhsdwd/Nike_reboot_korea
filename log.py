@@ -1,4 +1,4 @@
-from config import *
+import logging
 
 # create logger
 logger_name = "qwh"
@@ -8,13 +8,14 @@ logger.setLevel(logging.DEBUG)
 # create formatter
 # fmt = "%(asctime)-15s %(levelname)s %(filename)s %(lineno)d %(process)d %(message)s"
 fmt = "%(asctime)s %(levelname)s %(message)s"
-datefmt = "%Y-%m-%d %H:%M:%S"
+# datefmt = "%Y-%m-%d %H:%M:%S"
+datefmt = "%H:%M:%S"
 formatter = logging.Formatter(fmt, datefmt)
 
 # create file handler
 log_path = "./logging.log"
 fh = logging.FileHandler(log_path)
-fh.setLevel(logging.WARN)
+fh.setLevel(logging.DEBUG)
 fh.setFormatter(formatter)
 
 # create input handler

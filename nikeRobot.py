@@ -30,20 +30,31 @@ class nikeRobot():
     def login(self):
 
         self.start=time()
-
         # 等待界面出现
         self.driver.get("https://www.nike.com/kr/ko_kr/")
         self.driver.implicitly_wait(10)
         time1=time()
-        print("打开主页共耗时{:.3f}".format(time1-self.start))
+        logger.debug("打开主页,耗时{:.3f}".format(time1-self.start))
         WebDriverWait(self.driver, 15).until(lambda x: x.find_element_by_link_text(u"로그인"))
         # 等待로그인按键
         self.driver.find_element_by_link_text(u"로그인").click()
         # 点击로그인
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH,"//*[@id='kakao-sync-modal-login']/div/div/div")))
-        # 等待出现js登陆框
-        self.driver.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='카카오계정으로 로그인'])[1]/following::span[1]").click()
-        # 点击登陆
+        try:
+            WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH,"//*[@id='kakao-sync-modal-login']/div/div/div")))
+            # 等待出现js登陆框
+            self.driver.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='카카오계정으로 로그인'])[1]/following::span[1]").click()
+            # 点击登陆
+        except TimeoutException:
+            logger.warning("登陆过程中元素没有找到,正在刷新界面重新登录")
+            self.driver.refresh()
+            WebDriverWait(self.driver, 15).until(lambda x: x.find_element_by_link_text(u"로그인"))
+            # 等待로그인按键
+            self.driver.find_element_by_link_text(u"로그인").click()
+            # 点击로그인
+            WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH,"//*[@id='kakao-sync-modal-login']/div/div/div")))
+            # 等待出现js登陆框
+            self.driver.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='카카오계정으로 로그인'])[1]/following::span[1]").click()
+            # 点击登陆
 
         self.driver.find_element_by_id("j_username").click()
         self.driver.find_element_by_id("j_username").clear()
@@ -55,8 +66,7 @@ class nikeRobot():
         WebDriverWait(self.driver, 5).until(lambda x: x.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='로그인 유지하기'])[1]/following::button[1]"))
         self.driver.find_element_by_xpath(u"(.//*[normalize-space(text()) and normalize-space(.)='로그인 유지하기'])[1]/following::button[1]").click()
         time2=time()
-        print("成功登陆,登陆共耗时{:.3f}".format(time2-time1))
-        time3=time()
+        logger.debug("成功登陆,耗时{:.3f}".format(time2-time1))
 
     def robot_start(self,url,kakao_phone,kakao_birth):
 
@@ -64,13 +74,14 @@ class nikeRobot():
             now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
             if now > self.start_time:
 
-                print("到了{}".format(now))
+                time3 = time()
+                logger.debug("到了{}".format(now[11:19]))
                 newwindow = 'window.open("{}")'.format(url)
                 self.driver.execute_script(newwindow)
                 # 移动句柄，对新打开页面进行操作
                 self.driver.switch_to.window(self.driver.window_handles[1])
                 # 到新界面
-                print("已经到鞋子页面")
+                logger.debug("到鞋子页面,耗时{:.3f}".format(time()-time3))
                 self.driver.switch_to.window(self.driver.window_handles[0])
                 # 移动句柄到主页
                 self.driver.close()
@@ -78,38 +89,50 @@ class nikeRobot():
                 self.driver.switch_to.window(self.driver.window_handles[0])
                 # 重新回到鞋子界面
 
-                time3=time()
                 WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH,"//*[@class='btn-link xlarge btn-order width-max']")))
                 # sleep(0.1)
                 # try:
                 # with open("nike.html","w") as f:
                 #     f.write(self.driver.page_source)
-                time5=time()
+                time4=time()
                 shoes_size=list()
                 html = etree.HTML(self.driver.page_source)
                 shoesSize = html.xpath("//div[@class='opt-list']//span[not(@disabled='disabled')][@class='input-radio']//label[@class='']")
                 for shoe in shoesSize:
                     shoes_size.append(shoe.text)
-                print(shoes_size)
-                print(time()-time5)
+                logger.debug("现有尺码{}".format(shoes_size))
+                if self.shoes_size not in shoes_size:
+                    logger.warning("选择的尺码没货，自动选择现货中最小尺码")
+                    self.shoes_size = str(min(shoes_size))
 
                 self.driver.find_element_by_xpath("//span[@typename='{}']".format(self.shoes_size)).click()
-            # # 点击鞋子型号
+            # 点击鞋子型号
                 self.driver.find_element_by_xpath("//a[@class='btn-link xlarge btn-order width-max']").click()
             # 点击바로구매按键
+                logger.debug("选择{}码成功，到付款界面".format(self.shoes_size))
 
                 self.driver.find_element_by_xpath("//*[@for='Reason_1']").click()
                 # 选择一般配送
                 self.driver.find_element_by_id("btn-next").click()
                 # 点击다음 단계 진행
-                WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH,"//button[@class='button xlarge width-max']")))
-                self.driver.find_element_by_xpath("//*[@class='label font-size-s']").click()
-                # 点击위 주문의 상품, 가격, 할인, 배송정보에 동의합니다
+
+                try:
+                    WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH, "//button[@class='button xlarge width-max']")))
+                    self.driver.find_element_by_xpath("//*[@class='label font-size-s']").click()
+                    # 点击위 주문의 상품, 가격, 할인, 배송정보에 동의합니다
+                except NoSuchElementException:
+                    logger.warning("在选择配送界面没有找到元素，正在重试")
+                    self.driver.find_element_by_xpath("//*[@class='label font-size-s']").click()
+                    # 再次尝试
                 self.driver.find_element_by_xpath("//*[@class='button xlarge width-max']").click()
                 # 点击 결제하기
+                try:
+                    WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH,"//div[@class='imp-dialog customizable payment-kakaopay pc']")))
+                    iframe = self.driver.find_elements_by_tag_name('iframe')
+                except TimeoutException:
+                    WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH,"//div[@class='imp-dialog customizable payment-kakaopay pc']")))
+                    iframe = self.driver.find_elements_by_tag_name('iframe')
 
-                WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.XPATH,"//div[@class='imp-dialog customizable payment-kakaopay pc']")))
-                iframe = self.driver.find_elements_by_tag_name('iframe')
                 self.driver.switch_to.frame(iframe[len(iframe)-2])
 
                 WebDriverWait(self.driver, 2).until(EC.visibility_of_element_located((By.XPATH,"//ul[@class='list_gnb']")))
@@ -123,23 +146,26 @@ class nikeRobot():
                 self.driver.find_element_by_id("userBirth").send_keys(kakao_birth)
                 self.driver.find_element_by_id("userPost").submit()
 
-                # except TimeoutException:
-                #     print("没有找到元素")
-
-                print("到付款共耗时{:.3f}".format(time()-time3))
-                print("总过程耗时{:.3f}".format(time()-self.start))
-                sleep(600)
-                # l[1].click()
-                # sleep(50)
-
-                # print(driver.window_handles)
-                # print(li)
-                # driver.switch_to.frame(driver.find_elements_by_xpath("//*[@class='imp-dialog customizable payment-kakaopay pc']/iframe[2]"))
-                # sleep(3)
-                # driver.find_elements_by_xpath("//*[@class='list_gnb']").click()
-                # print(dr)
+                logger.debug("尽快在kakao上完成付款，总耗时{:.3f}".format(time()-time3))
+                sleep(10)
 
                 break
+
+class MyThread(threading.Thread):
+
+    def __init__(self,func):
+        super(MyThread,self).__init__()
+        # threading.Thread.__init__(self)
+        self.func = func
+
+    def run(self):
+        self.result = self.func()
+
+    def get_result(self):
+        try:
+            return self.result
+        except Exception:
+            return None
 
 
 if __name__ == '__main__':
@@ -148,7 +174,7 @@ if __name__ == '__main__':
     user_passwd = "qwh961126!"
     url = "https://www.nike.com/kr/ko_kr/t/adult-unisex/fw/action-outdoor/BQ6817-006/oaic91/nike-sb-dunk-low-pro"
     url = "https://www.nike.com/kr/ko_kr/t/men/fw/running/BQ1671-002/ifaa28/nike-odyssey-react-2-shield"
-    shoes_size = "250"
+    shoes_size = "240"
     start_time = "2019-10-31 10:00:00"
     kakao_phone = "01029972828"
     kakao_birth = "970105"
@@ -160,3 +186,15 @@ if __name__ == '__main__':
     nike_robot1.robot_start(url, kakao_phone, kakao_birth)
 
 
+# while 1:
+#     start = time.clock()
+#     try:
+#         driver_item.find_element_by_xpath("//div[@class='fliter-wp']/div/form/div/div/label[5]").click()
+#         print '已定位到元素'
+#         end=time.clock()
+#         break
+#     except:
+#         print "还未定位到元素!"
+#
+# print '定位耗费时间：'+str(end-start)
+#

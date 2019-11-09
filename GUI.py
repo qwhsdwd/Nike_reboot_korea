@@ -1,5 +1,5 @@
 from tkinter import *
-from main import nikeRobot
+from nikeRobot import nikeRobot
 
 root=Tk()
 

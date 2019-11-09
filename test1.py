@@ -1,5 +1,9 @@
-from read_from_database_shoes_size import shoes_size_list
+from config import *
 from log import *
+from database import database
+from nikeRobot import MyThread
+
+
 
 if __name__ == '__main__':
 
@@ -17,8 +21,14 @@ if __name__ == '__main__':
 
     # print(test2)
     # print(test2[0].xpath("//label")[0].text)
-    print(shoes_size_list)
-    print("数据库中鞋子货号的个数是{}".format(len(shoes_size_list)))
+    # print(shoes_size_list)
+    # print("数据库中鞋子货号的个数是{}".format(len(shoes_size_list)))
+    # t1=threading.Thread(target=database)
+    t1=MyThread(database)
+    t1.start()
+    t1.join()
+    print(t1.get_result())
+    # print(database())
     print("有货的数量:",len(test))
     print("所有鞋子的数量:",len(test))
     logger.debug('debug message')
@@ -26,4 +36,4 @@ if __name__ == '__main__':
     logger.warning('warn message')
     logger.error('error message')
     logger.critical('critical message')
-    print("共耗时%.2f"%(time()-start))
+

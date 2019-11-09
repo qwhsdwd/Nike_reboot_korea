@@ -7,6 +7,8 @@ from selenium.webdriver.common.keys import Keys  # 键盘按键操作
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait  # 等待页面加载某些元素
 from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 from time import *
 import json
 import requests
@@ -18,6 +20,6 @@ import random
 from lxml import etree
 from time import strftime
 import demjson
-import database
-import logging
+# import database
 from log import *
+from queue import Queue
