@@ -13,7 +13,7 @@ datefmt = "%H:%M:%S"
 formatter = logging.Formatter(fmt, datefmt)
 
 # create file handler
-log_path = "./logging.log"
+log_path = "./log/logging.log"
 fh = logging.FileHandler(log_path)
 fh.setLevel(logging.DEBUG)
 fh.setFormatter(formatter)
