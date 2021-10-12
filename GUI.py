@@ -4,12 +4,14 @@ from PIL import Image, ImageTk
 from nikeRobot import nikeRobot
 import threading
 
+
 def clear_log():
 
     with open("./log/logging.log","w")as f:
         f.write("")
 
 def main():
+
 
     def center_window(w, h):
         # 获取屏幕 宽、高
@@ -60,7 +62,7 @@ def main():
     def handle_focus_out_birth_example(_):
         birthday_example.delete(0, END)
         birthday_example.config(fg='grey')
-        birthday_example.insert(0, "Example:19990101")
+        birthday_example.insert(0, "Example:990101")
 
     def handle_focus_in_shoe_size_example(_):
         shoe_size_example.delete(0, END)
@@ -97,10 +99,10 @@ def main():
     Label(root,text="开始时间").grid(row=5,column=0)
     time_example=Entry(root,textvariable=start_time_input)
     time_example.grid(row=5,column=1)
-    Label(root,text="kakao电话").grid(row=6,column=0)
+    Label(root,text="电话").grid(row=6,column=0,sticky=W)
     phone_example=Entry(root,textvariable=kakao_phone_input)
     phone_example.grid(row=6,column=1)
-    Label(root,text="kakao生日").grid(row=7,column=0)
+    Label(root,text="生日").grid(row=7,column=0,sticky=W)
     birthday_example=Entry(root,textvariable=kakao_birth_input)
     birthday_example.grid(row=7,column=1)
 
@@ -109,7 +111,7 @@ def main():
     phone_example.bind("<FocusIn>",handle_focus_in_phone_example)
     phone_example.bind("<Return>",handle_focus_out_phone_example("Example:01012345678"))
     birthday_example.bind("<FocusIn>",handle_focus_in_birth_example)
-    birthday_example.bind("<Return>",handle_focus_out_birth_example("Example:19990101"))
+    birthday_example.bind("<Return>",handle_focus_out_birth_example("Example:990101"))
     shoe_size_example.bind("<FocusIn>",handle_focus_in_shoe_size_example)
     shoe_size_example.bind("<Return>",handle_focus_out_shoe_size_example("如有多个鞋码请用,号隔开"))
 
@@ -144,7 +146,8 @@ def main():
     def clear_log():
         text.delete(0.0, END)
     but1=Button(root,text="开始",command=lambda :thread_it(get_str),height=1,width=7).grid(row=12,column=0)
-    but2=Button(root,text="清除日志",command=lambda :thread_it(clear_log),width=7).grid(row=12,column=1)
+    but2=Button(root,text="清除日志",command=lambda :thread_it(clear_log),width=7).grid(row=12,column=1,sticky=W)
+    # but3=Button(root,text="退出程序",command=quit,width=7).grid(row=12,column=4,sticky=E)
 
     def read_log_file():
 

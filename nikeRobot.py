@@ -41,6 +41,7 @@ class nikeRobot():
         WebDriverWait(self.driver, 60).until(lambda x: x.find_element_by_link_text(u"로그인"))
         # 等待로그인按键
         self.driver.find_element_by_link_text(u"로그인").click()
+        sleep(0.3)
         # 点击로그인
         # try:
         #     # WebDriverWait(self.driver, 60).until(EC.visibility_of_element_located((By.XPATH,"//*[@id='kakao-sync-modal-login']/div/div/div")))
@@ -69,12 +70,21 @@ class nikeRobot():
         # 输入账号和密码
         WebDriverWait(self.driver, 60).until(lambda x: x.find_element_by_xpath(
             u"(.//*[normalize-space(text()) and normalize-space(.)='로그인 유지하기'])[1]/following::button[1]"))
-        sleep(0.5)
+        # sleep(0.5)
         self.driver.find_element_by_xpath(
             u"(.//*[normalize-space(text()) and normalize-space(.)='로그인 유지하기'])[1]/following::button[1]").click()
         sleep(1)
-        time2 = time()
-        logger.debug("成功登陆,耗时{:.3f}".format(time2 - time1))
+        # self.driver.refresh()
+        xpath_test1=etree.HTML(self.driver.page_source)
+        if "회원가입" in xpath_test1.xpath("//ul[@class='uk-float-right header-mymenu']/li[1]//a/text()"):
+            logger.error("账号密码错误，请检查后重新运行")
+            self.driver.close()
+        else:
+            # logger.debug("{}成功登录".format(xpath_test1.xpath("//ul[@class='uk-float-right header-mymenu']/li[1]//a/text()")[0]))
+            time2 = time()
+            # with open ("nike_test.html","w") as f:
+            #     f.write(self.driver.page_source)
+            logger.debug("{}成功登陆,耗时{:.3f}".format(xpath_test1.xpath("//span[@class='uk-margin-mini-left']/text()")[0],(time2 - time1)))
 
     def robot_start(self, url, kakao_phone, kakao_birth):
 
@@ -123,16 +133,23 @@ class nikeRobot():
                             for shoe in shoesSize:
                                 shoes_size.append(shoe.text)
                             logger.debug("现有尺码{}".format(shoes_size))
-                            if self.shoes_size not in shoes_size:
-                                logger.warning("选择的尺码没货，自动选择现货中最小尺码")
-                                self.shoes_size = str(min(shoes_size))
-
-                            self.driver.find_element_by_xpath("//span[@typename='{}']".format(self.shoes_size)).click()
-                            # 点击鞋子型号
+                            if "," in self.shoes_size:
+                                shoes_size_L=self.shoes_size.split(",")
+                            else:
+                                shoes_size_L=list(self.shoes_size)
+                            for _ in shoes_size_L:
+                                if _ in shoes_size:
+                                    select_shoes_size=_
+                                    break
+                                else :
+                                    select_shoes_size="0"
+                            if select_shoes_size=="0":
+                                select_shoes_size = str(min(shoes_size))
+                            self.driver.find_element_by_xpath("//span[@typename='{}']".format(select_shoes_size)).click()
                             self.driver.find_element_by_xpath(
                                 "//a[@class='btn-link xlarge btn-order width-max']").click()
                             # 点击바로구매按键
-                            logger.debug("选择{}码成功，到付款界面".format(self.shoes_size))
+                            logger.debug("选择{}码成功，到付款界面".format(select_shoes_size))
 
                             self.driver.find_element_by_xpath("//*[@for='Reason_1']").click()
                             # 选择一般配送
@@ -205,7 +222,7 @@ if __name__ == '__main__':
     # url = "https://www.nike.com/kr/ko_kr/t/men/fw/running/BQ1671-002/ifaa28/nike-odyssey-react-2-shield"
     url = "https://www.nike.com/kr/launch/t/women/fw/nike-sportswear/CD8178-001/lhkq64/ws-vapor-street-ow"
     url = "https://www.nike.com/kr/ko_kr/t/men/fw/basketball/BQ4631-001/jrek84/kyrie-6-ep"
-    shoes_size = "240"
+    shoes_size = "244,260,265"
     start_time = "10-31 10:00:00"
     kakao_phone = "01029972828"
     kakao_birth = "970105"
