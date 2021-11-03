@@ -4,14 +4,14 @@ from nikeRobot import nikeRobot
 
 if __name__ == '__main__':
 
-    user_name = "qwhsdwd@gmail.com"
-    user_passwd = "qwh961126!"
+    user_name = "xxxxxxxxx"
+    user_passwd = "xxxxxxx"
     url = "https://www.nike.com/kr/ko_kr/t/adult-unisex/fw/action-outdoor/BQ6817-006/oaic91/nike-sb-dunk-low-pro"
     url = "https://www.nike.com/kr/ko_kr/t/men/fw/running/BQ1671-002/ifaa28/nike-odyssey-react-2-shield"
     shoes_size = "250"
     start_time = "2019-10-31 10:00:00"
-    kakao_phone = "01029972828"
-    kakao_birth = "970105"
+    kakao_phone = "xxxxxx"
+    kakao_birth = "xxxxxx"
     ip_proxy = []
 
     # user_name=input("NIKE账号: ")
