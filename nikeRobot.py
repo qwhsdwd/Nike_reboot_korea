@@ -216,16 +216,16 @@ class MyThread(threading.Thread):
 
 
 if __name__ == '__main__':
-    user_name = "qwhsdwd@gmail.com"
-    user_passwd = "qwh961126!"
+    user_name = "xxxxxx"
+    user_passwd = "xxxxxx"
     # url = "https://www.nike.com/kr/ko_kr/t/adult-unisex/fw/action-outdoor/BQ6817-006/oaic91/nike-sb-dunk-low-pro"
     # url = "https://www.nike.com/kr/ko_kr/t/men/fw/running/BQ1671-002/ifaa28/nike-odyssey-react-2-shield"
     url = "https://www.nike.com/kr/launch/t/women/fw/nike-sportswear/CD8178-001/lhkq64/ws-vapor-street-ow"
     url = "https://www.nike.com/kr/ko_kr/t/men/fw/basketball/BQ4631-001/jrek84/kyrie-6-ep"
     shoes_size = "244,260,265"
     start_time = "10-31 10:00:00"
-    kakao_phone = "01029972828"
-    kakao_birth = "970105"
+    kakao_phone = "xxxxxx"
+    kakao_birth = "xxxxxx"
     ip_proxy = []
 
     nike_robot1 = nikeRobot(user_name, user_passwd, shoes_size, start_time, ip_proxy)
