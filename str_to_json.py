@@ -16,11 +16,11 @@ if __name__ == '__main__':
     print(str_to_json("""address.isoCountryAlpha2: US
     isSearchAddress: true
     address.fullName: quweihao
-    address.phonePrimary.phoneNumber: 01029972828
-    address.addressLine1: 서울특별시 마포구 동교로22길 22
+    address.phonePrimary.phoneNumber: xxxxxxx
+    address.addressLine1: 서울특별시 xxxxxxxxxxx
     address.addressLine2: 302호
     address.postalCode: 04030
     selectPersonalMessage: 
     personalMessageText: 
     fulfillmentOptionId: 1
-    csrfToken: KCFF-YOKV-H98U-MT55-PAN0-8LRW-KH1H-HZML"""))
+    csrfToken: KCFF-YOKV-H98U-MT55-PAN0-8LRW-KH1H-xxxx"""))
